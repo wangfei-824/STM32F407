@@ -51,7 +51,10 @@
 
 /* USER CODE END PV */
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/  
+void SystemClock_Config(void);
+/* USER CODE BEGIN PFP */
+
 #ifdef __GNUC__
   /* With GCC, small printf (option LD Linker->Libraries->Small printf
      set to 'Yes') calls __io_putchar() */
@@ -59,9 +62,6 @@
 #else
   #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif /* __GNUC__ */
-  
-void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
@@ -124,20 +124,6 @@ int main(void)
 }
 
 /**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  None
-  * @retval None
-  */
-PUTCHAR_PROTOTYPE
-{
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
-  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF); 
-
-  return ch;
-}
-
-/**
   * @brief System Clock Configuration
   * @retval None
   */
@@ -181,6 +167,20 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF); 
+
+  return ch;
+}
 
 /* USER CODE END 4 */
 
